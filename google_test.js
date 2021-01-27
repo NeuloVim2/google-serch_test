@@ -1,14 +1,16 @@
-describe( 'Google Search Test', () => {
-    it( 'Visit the Google Serch Page', () => {
-        cy.visit('https://www.google.com')
+describe('Google search Test', () => {
+    it('Go to serch results at google.com', () => {
 
-        cy.get('.gLFyf')
-          .type('wikipedia')
-          .should('have.value', 'wikipedia')
+        cy.visit('https://www.google.com');
 
-        cy.contains('Пошук Google').click()
+        cy.get('input[type=text]')
+          .type('wikipedia philosophy');
 
-        cy.get('.gLFyf')
-          .should('have.value', 'wikipedia')
+        cy.get('input[name~=btnK]:first')
+          .click();
+
+        cy
+          .url()
+          .should('include', 'wikipedia+philosophy')
     })
 })
